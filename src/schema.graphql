@@ -1,10 +1,15 @@
+# import * from './generated/prisma.graphql'
+
 type User {
   id: ID!
   name: String!
-  email: String! @unique
-  password: String!
-  resetToken: String
-  resetTokenExpiry: Float
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
+  email: String!
+}
+
+type Mutation {
+  signup(email: String!, password: String!, name: String!): User!
+}
+
+type Query {
+  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, first: Int): [Item]!
 }
