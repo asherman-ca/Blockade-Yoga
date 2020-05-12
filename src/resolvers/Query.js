@@ -1,9 +1,12 @@
 const { forwardTo } = require('prisma-binding');
+const itemQueries = require('./queries/items');
+const { hasPermission } = require('../utils');
 
 const Query = {
-  items: forwardTo('db'),
-  item: forwardTo('db'),
-  itemsConnection: forwardTo('db'),
+  // items: forwardTo('db'),
+  // item: forwardTo('db'),
+  // itemsConnection: forwardTo('db'),
+  ...itemQueries,
   me(parent, args, ctx, info) {
     if(!ctx.request.userId){
       return null;
