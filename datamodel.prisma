@@ -1,3 +1,12 @@
+enum Permission {
+  ADMIN
+  USER
+  ITEMCREATE
+  ITEMUPDATE
+  ITEMDELETE
+  PERMISSIONUPDATE
+}
+
 type User {
   id: ID! @id
   name: String!
@@ -5,6 +14,8 @@ type User {
   password: String!
   resetToken: String
   resetTokenExpiry: Float
+  permissions: [Permission] @scalarList(strategy: RELATION)
+  cart: [CartItem!]!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -19,4 +30,33 @@ type Item {
   user: User!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+}
+
+type CartItem {
+  id: ID! @id
+  quantity: Int! @default(value: 1)
+  item: Item
+  user: User!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type OrderItem {
+  id: ID! @id
+  title: String!
+  description: String!
+  image: String
+  largeImage: String
+  price: Int!
+  quantity: Int! @default(value: 1)
+  user: User
+}
+
+type Order {
+  id: ID! @id
+  items: [OrderItem!]!
+  total: Int!
+  user: User!
+  charge: String!
+  createdAt: DateTime! @createdAt
 }
