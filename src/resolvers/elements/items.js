@@ -6,4 +6,4 @@ const itemQueries = {
   itemsConnection: forwardTo('db')
 }
 
-module.exports = itemQueries;
+module.exports = { itemQueries };
