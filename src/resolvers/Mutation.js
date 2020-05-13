@@ -17,6 +17,7 @@ const mutations = {
     const item = await ctx.db.mutation.createItem({
       data: {
         ...args,
+        price: args.price * 100,
         user: {
           connect: {
             id: ctx.request.userId
